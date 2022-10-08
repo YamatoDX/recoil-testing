@@ -1,65 +1,40 @@
-import Head from 'next/head'
-import Image from 'next/image'
-
-import styles from '@/pages/index.module.css'
+import React from "react";
+import { mainState } from "@/store/mainState";
+import { useRecoilState } from "recoil";
 
 export default function Home() {
+  const [mainRecoilState, setRecoilState] = useRecoilState<any>(mainState);
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+    <div>
+      <button
+        onClick={() => {
+          console.log("mainRecoilState is", mainRecoilState);
+        }}
+      >
+        Click to see{" "}
+      </button>
+      <button
+        onClick={() => {
+          const myRandomNumber = Math.floor(Math.random() * 1000);
+          setRecoilState({
+            ...mainRecoilState,
+            products: [...mainRecoilState.products, myRandomNumber],
+          });
+        }}
+      >
+        Update Products {mainRecoilState.products.length}
+      </button>
+      <button
+        onClick={() => {
+          const myRandomNumber = Math.floor(Math.random() * 1000);
+          setRecoilState({
+            ...mainRecoilState,
+            users: [...mainRecoilState.users, myRandomNumber],
+          });
+        }}
+      >
+        Update Users {mainRecoilState.users.length}
+      </button>
     </div>
-  )
+  );
 }
