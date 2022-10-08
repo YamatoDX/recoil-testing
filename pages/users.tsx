@@ -22,7 +22,7 @@ export default function Home() {
           });
         }}
       >
-        Update Products {mainRecoilState.users.length}
+        Update Users {mainRecoilState.users.length}
       </button>
     </div>
   );
