@@ -7,18 +7,22 @@ export default function Home() {
   const [mainRecoilState, setRecoilState] = useRecoilState<any>(mainState);
   return (
     <div>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
       <Link href="/products">
         <a>Products</a>
       </Link>
-      <Link href="/users">
-        <a>Users</a>
-      </Link>
       <button
         onClick={() => {
-          console.log("mainRecoilState is", mainRecoilState);
+          const myRandomNumber = Math.floor(Math.random() * 1000);
+          setRecoilState({
+            ...mainRecoilState,
+            users: [...mainRecoilState.users, myRandomNumber],
+          });
         }}
       >
-        Click to see{" "}
+        Update Products {mainRecoilState.users.length}
       </button>
     </div>
   );
